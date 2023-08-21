@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function backupDB($settings, Schedule $schedule): void
     {
 
-        if($settings->period === 'everyMinute'){
+        if($settings->period === 'everyFiveMinutes'){
             $schedule->command('app:backup')->everyFiveMinutes();
         }
 
@@ -47,8 +47,8 @@ class Kernel extends ConsoleKernel
     protected function cleanupDB($settings, Schedule $schedule): void
     {
 
-        if($settings->cleanup_period === 'everyMinute'){
-            $schedule->command('backup:clean')->everyFifteenMinutes();
+        if($settings->cleanup_period === 'everyFiveMinutes'){
+            $schedule->command('backup:clean')->everyFiveMinutes();
         }
 
         if($settings->cleanup_period === 'weekly'){

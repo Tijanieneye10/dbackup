@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BackupRequest;
 use App\Models\Backup;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\View;
 
 
@@ -26,7 +26,8 @@ class BackupController extends Controller
     {
 
         Backup::create([
-            ...$request->validated()
+            ...$request->validated(),
+            'dbpass' => Crypt::encrypt($request->dbpass),
         ]);
 
         return to_route('backups.index');

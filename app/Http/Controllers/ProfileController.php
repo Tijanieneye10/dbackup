@@ -13,17 +13,17 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the user's settings form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('settings.edit', [
             'settings' => Setting::first()
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Update the user's settings information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('settings.edit')->with('status', 'settings-updated');
     }
 
     /**

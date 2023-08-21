@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Backup;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 
 class BackupCommand extends Command
@@ -26,7 +27,7 @@ class BackupCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $dbs = Backup::query()
                     ->where('status', true)
@@ -41,15 +42,15 @@ class BackupCommand extends Command
             Config::set('database.connections.mysql.host', $db->dbhost);
             Config::set('database.connections.mysql.database', $db->dbname);
             Config::set('database.connections.mysql.username', $db->dbuser);
-            Config::set('database.connections.mysql.password', $db->dbpass);
+            Config::set('database.connections.mysql.password', Crypt::decrypt($db->dbpass));
 
             $this->backupCommand();
         }
 
     }
 
-    protected function backupCommand() : void
+    protected function backupCommand(): int
     {
-        $this->call('backup:run', ['--only-db' => true]);
+       return $this->call('backup:run', ['--only-db' => true]);
     }
 }

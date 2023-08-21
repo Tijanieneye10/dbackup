@@ -15,14 +15,14 @@
 
         <div class="form-control w-52">
             <x-input-label for="status" :value="__('Change Backup Status')" />
-            <input type="checkbox" class="toggle bg-indigo-700" name="status" @if($settings->status) checked @endif  />
+            <input type="checkbox" class="toggle bg-indigo-700" name="status" @if($settings?->status) checked @endif  />
         </div>
 
         <div>
             <x-input-label for="period" :value="__('Period')" />
-            <select name="period" value="{{ old('period', $settings->period) }}" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" id="period"  required >
-                <option value="" disabled >Select Period</option>
-                <option value="everyMinute">Every Minutes</option>
+            <select name="period" value="{{ old('period', $settings?->period) }}" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" id="period"  required >
+                <option value="" disabled @if(!$settings?->status) selected @endif>Select Period</option>
+                <option value="everyFiveMinutes">Every Five Minutes</option>
                 <option value="weekly">Weekly</option>
                 <option value="weekend">Weekend</option>
                 <option value="monthly">Monthly</option>
@@ -32,16 +32,16 @@
 
         <div>
             <x-input-label for="time" :value="__('Time to Run (Every Minute excepted)')" />
-            <x-text-input  value="{{ old('period', $settings->time) }}" id="time" name="time" type="text" class="mt-1 block w-full" autocomplete="time" placeholder="e.g 6:00" />
+            <x-text-input  value="{{ old('period', $settings?->time) }}" id="time" name="time" type="text" class="mt-1 block w-full" autocomplete="time" placeholder="e.g 6:00" />
             <x-input-error :messages="$errors->get('time')" class="mt-2" />
         </div>
 
         <h2 class="font-bold">Cleanup Setup</h2>
         <div>
             <x-input-label for="cleanupPeriod" :value="__('Period')" />
-            <select name="cleanupPeriod" value="{{ old('cleanupPeriod', $settings->cleanup_period) }}" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" id="period"  required >
-                <option value="" disabled>Select Period</option>
-                <option value="everyMinute">Every Minutes</option>
+            <select name="cleanupPeriod" value="{{ old('cleanupPeriod', $settings?->cleanup_period) }}" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" id="period"  required >
+                <option value="" disabled @if(!$settings?->status) selected @endif>Select Period</option>
+                <option value="everyFiveMinutes">Every Five Minutes</option>
                 <option value="weekly">Weekly</option>
                 <option value="weekend">Weekend</option>
                 <option value="monthly">Monthly</option>
@@ -51,7 +51,7 @@
 
         <div>
             <x-input-label for="cleanupTime" :value="__('Time to Run (Every Minute excepted)')" />
-            <x-text-input value="{{ old('period', $settings->cleanup_time) }}" id="cleanupTime" name="cleanupTime" type="text" class="mt-1 block w-full" placeholder="e.g 6:00" />
+            <x-text-input value="{{ old('period', $settings?->cleanup_time) }}" id="cleanupTime" name="cleanupTime" type="text" class="mt-1 block w-full" placeholder="e.g 6:00" />
             <x-input-error :messages="$errors->get('cleanupTime')" class="mt-2" />
         </div>
 
