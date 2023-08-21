@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +29,7 @@ Route::get('backups/create', [BackupController::class, 'create'])->middleware(['
 Route::post('backups/store', [BackupController::class, 'store'])->middleware(['auth', 'verified'])->name('backups.store');
 Route::delete('backups/destroy/{backup}', [BackupController::class, 'destroy'])->middleware(['auth', 'verified'])->name('backups.destroy');
 Route::get('backups/toggle/{backup}', [BackupController::class, 'toggleStatus'])->middleware(['auth', 'verified'])->name('backups.toggle');
-
-
+Route::put('backups/settings', [SettingController::class, 'index'])->name('backups.settings');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

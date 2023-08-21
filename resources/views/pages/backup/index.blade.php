@@ -50,7 +50,7 @@
                                                     <button>Delete</button>
                                                 </form>
                                             </li>
-                                            <li><a href="{{ route('backups.toggle', $backup) }}">{{ $backup->status ? 'Enable' : 'Disable' }}</a></li>
+                                            <li><a href="{{ route('backups.toggle', $backup) }}">{{ $backup->status ? 'Disable' : 'Enable' }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
