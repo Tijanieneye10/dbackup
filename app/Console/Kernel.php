@@ -48,19 +48,19 @@ class Kernel extends ConsoleKernel
     {
 
         if($settings->cleanup_period === 'everyFiveMinutes'){
-            $schedule->command('backup:clean')->everyFiveMinutes();
+            $schedule->command('app:cleanup')->everyFiveMinutes();
         }
 
         if($settings->cleanup_period === 'weekly'){
-            $schedule->command('backup:clean')->weekly()->at($settings->cleanup_time);
+            $schedule->command('app:cleanup')->weekly()->at($settings->cleanup_time);
         }
 
         if($settings->cleanup_period === 'weekend'){
-            $schedule->command('backup:clean')->weekends()->at($settings->cleanup_time);
+            $schedule->command('app:cleanup')->weekends()->at($settings->cleanup_time);
         }
 
         if($settings->cleanup_period === 'monthly'){
-            $schedule->command('backup:clean')->weekends()->at($settings->cleanup_time);
+            $schedule->command('app:cleanup')->weekends()->at($settings->cleanup_time);
         }
     }
 

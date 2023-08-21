@@ -36,7 +36,7 @@ class BackupCommand extends Command
 
         foreach($dbs as $db){
 
-//            Config::set('backup.backup.name', $db->dbfolder);
+            Config::set('backup.backup.name', $db->dbfolder);
             Config::set('backup.backup.destination.filename_prefix', "$db->dbfolder-");
             Config::set('database.connections.mysql.driver', $db->dbdriver);
             Config::set('database.connections.mysql.host', $db->dbhost);
