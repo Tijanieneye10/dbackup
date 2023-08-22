@@ -20,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', static function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::get('backups', [BackupController::class, 'index'])->middleware(['auth', 'verified'])->name('backups.index');
 Route::get('backups/create', [BackupController::class, 'create'])->middleware(['auth', 'verified'])->name('backups.create');
